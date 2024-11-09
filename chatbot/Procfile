@@ -1,3 +1,6 @@
-release: pip install rasa
+release: apt-get update && apt-get install -y python3-pip && pip3 install rasa
 web: rasa run --enable-api --port 5005
 worker: rasa run actions --port 5055
+# release: pip install rasa
+# web: rasa run --enable-api --port 5005
+# worker: rasa run actions --port 5055
