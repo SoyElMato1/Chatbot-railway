@@ -1,7 +1,7 @@
-ENV PATH="/usr/local/bin:$PATH"
+
 
 release: apt-get update && apt-get install -y python3-pip && pip install rasa
-web: rasa run --enable-api --port 5005
+web: sh -c "rasa train && rasa run --enable-api --port 5005 & rasa run actions --port 5055"
 worker: rasa run actions --port 5055
 
 # release: apt-get update && apt-get install -y python3-pip && pip install rasa && source /opt/venv/bin/activate && rasa --version
