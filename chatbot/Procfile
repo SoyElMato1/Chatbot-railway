@@ -1,1 +1,3 @@
-web: rasa train && rasa run && rasa actions
+release: pip install rasa
+web: rasa run --enable-api --port 5005
+worker: rasa run actions --port 5055
