@@ -1,0 +1,1 @@
+web: rasa train && rasa run && rasa actions
