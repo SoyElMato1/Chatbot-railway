@@ -1,3 +1,4 @@
+release: pip install rasa
 train: pip install rasa && rasa train
 web: pip install rasa && rasa run --enable-api --cors "*" --port 5005
 actions: pip install rasa && rasa run actions
