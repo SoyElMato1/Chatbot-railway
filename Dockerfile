@@ -9,6 +9,8 @@ COPY . /app
 WORKDIR /app
 
 # Instala dependencias adicionales si es necesario
+RUN python --version
+
 RUN pip install rasa 
 RUN pip install django
 
