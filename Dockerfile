@@ -9,7 +9,8 @@ COPY . /app
 WORKDIR /app
 
 # Instala dependencias adicionales si es necesario
-RUN pip install rasa django
+RUN pip install rasa 
+RUN pip install django
 
 # Entrena el modelo al construir la imagen
 RUN rasa train
