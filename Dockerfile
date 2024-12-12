@@ -1,26 +1,20 @@
 FROM rasa/rasa:3.2.0
 
-# Copiar archivos del proyecto
+# Copiar archivos al contenedor
 COPY . /app
 WORKDIR /app
 
-# Instalar dependencias del sistema
-RUN apt-get update && apt-get install -y \
-    python3-dev \
-    build-essential \
-    libssl-dev \
-    libffi-dev \
-    python3-pip \
-    python3-setuptools
+# Instalar dependencias mínimas
+RUN apt-get update --fix-missing && apt-get install -y libssl-dev libffi-dev
 
-# Configurar entorno virtual
+# Crear entorno virtual (opcional)
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-# Actualizar pip y herramientas de instalación
+# Actualizar pip
 RUN pip install --upgrade pip setuptools wheel
 
-# Instalar Rasa y dependencias
+# Instalar dependencias adicionales
 RUN pip install rasa django
 
 # Entrenar modelo
