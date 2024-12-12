@@ -1,5 +1,5 @@
 release: apt-get update && apt-get install -y supervisor python3-pip && pip install rasa rasa-sdk
-web: supervisord -c /PruebaCharbot/chatbot/supervisord.conf
+web: supervisord -c /PruebaCharbot/supervisord.conf
 
 # release: pip install rasa
 # train: rasa train
