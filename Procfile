@@ -1,5 +1,5 @@
 release: apt-get update && apt-get install -y supervisor python3-pip && pip install rasa rasa-sdk django
-web: supervisord -c supervisord.conf
+web: supervisord -c /bin/supervisord -h
 
 # release: pip install rasa django
 # train: rasa train
