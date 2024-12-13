@@ -1,33 +1,27 @@
-FROM rasa/rasa:3.2.0
+# Usa la imagen base de Rasa
+FROM python3.10
+# Reemplaza con la versión correspondiente
 
-# Copiar archivos al contenedor
+# Copia los archivos del proyecto al contenedor
 COPY . /app
+
+# Define el directorio de trabajo
 WORKDIR /app
 
-# Instalar dependencias mínimas
-RUN apt-get update --fix-missing && apt-get install -y libssl-dev libffi-dev
-
-# Crear entorno virtual (opcional)
-RUN python -m venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
-
-# Actualizar pip
-RUN pip install --upgrade pip setuptools wheel
-
-# Instalar dependencias adicionales
+# Instala dependencias adicionales si es necesario
 RUN pip install rasa django
 
-# Entrenar modelo
+# Entrena el modelo al construir la imagen
 RUN rasa train
 
-# Crear directorios de logs
-RUN mkdir -p /app/logs
-
-# Copiar configuración de supervisord
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-# Exponer puertos
+# Expone los puertos para la API y las acciones
 EXPOSE 5005 5055
 
-# Ejecutar supervisord
+# Usa supervisord para manejar múltiples procesos
+RUN apt-get update && apt-get install -y supervisor
+
+# Copia la configuración de supervisord
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Comando para iniciar supervisord
 CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
