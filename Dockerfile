@@ -1,5 +1,5 @@
 # Usa la imagen base de Rasa
-FROM python3.10
+FROM rasa/rasa:3.2.0 
 # Reemplaza con la versión correspondiente
 
 # Copia los archivos del proyecto al contenedor
