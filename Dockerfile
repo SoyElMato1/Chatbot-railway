@@ -1,5 +1,5 @@
 # Usa la imagen base de Rasa
-FROM rasa/rasa:3.2.0 
+FROM rasa/rasa:3.6.20 
 # Reemplaza con la versión correspondiente
 
 # Copia los archivos del proyecto al contenedor
@@ -9,7 +9,7 @@ COPY . /app
 WORKDIR /app
 
 # Instala dependencias adicionales si es necesario
-RUN pip install rasa django
+RUN pip3 install rasa django
 
 # Entrena el modelo al construir la imagen
 RUN rasa train
